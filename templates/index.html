@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Medical Diagnostic Assistant</h1>
+    {% if result and result!=[''] %}
+        <div id="prediction">
+        <h2>Predicted Diseases:</h2>
+        <ul>
+            {% for disease, probability in result %}
+                <li>{{ disease }}</li>
+            {% endfor %}
+        </ul>
+        <form id="secondform" method="post"><button id="homebutton" name="symptoms" value="">Back to main page</button></form>
+    </div>
+    {% else %}
+    
+    <!-- Search bar for symptoms -->
+    <input type="text" id="search" placeholder="Search symptoms..." onkeyup="filterSymptoms()">
+
+    <form id="mainform" method="post">
+        <label id="Select">Select your symptoms:</label><br>
+        <br>
+        <!-- Symptoms container in 6-column grid -->
+        <div class="symptom-container">
+            {% for symptom in symptoms %}
+                <label class="symptom-item">
+                    <input type="checkbox" name="symptoms" value="{{ symptom }}"> {{ symptom }}
+                </label>
+            {% endfor %}
+        </div>
+
+        <br>
+        <button type="submit">Predict</button>
+    </form>
+    {% endif %}
+    
+    <script>
+        function ret(){
+
+        }
+        function filterSymptoms() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let symptoms = document.querySelectorAll(".symptom-item");
+
+            symptoms.forEach(symptom => {
+                let text = symptom.textContent.toLowerCase();
+                if (text.includes(input)) {
+                    symptom.style.display = "block";
+                } else {
+                    symptom.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
