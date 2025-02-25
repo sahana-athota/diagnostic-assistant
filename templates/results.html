@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analysis Results</title>
+</head>
+<body>
+    <h1>Analysis Results</h1>
+    
+    <h2>Patient Information</h2>
+    <ul>
+        {% for key, value in patient_info.items() %}
+            <li><strong>{{ key }}:</strong> {{ value }}</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Health Risks</h2>
+    <ul>
+        {% for test, result in risk_results.items() %}
+            <li><strong>{{ test }}:</strong> {{ result }}</li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Predicted Diseases</h2>
+    <ul>
+        {% for disease in predicted_diseases %}
+            <li>{{ disease }}</li>
+        {% endfor %}
+    </ul>
+    
+    <a href="/">Upload Another Report</a>
+</body>
+</html>

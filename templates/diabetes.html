@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Risk Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_diabetes.css') }}">
+</head>
+
+<body class="bg-light" style="background-color: #B3D8A8 !important;">
+    <h2 class="text-center">Diabetes Risk Predictor</h2>
+<div class="container mt-5 main" >
+    
+    {% if result %}
+        <div class="mt-4 alert alert-info text-center">
+            <h4>{{ result }}</h4>
+            <p>📊 Probability: {{ probability }}</p>
+        </div>
+        <form method="post"><button name="home" value="back" class="btn btn-5 btn-primary home">Back to Home</button></form>
+   
+    {% else %}
+    
+    <form method="POST" class="card p-4 shadow">
+        <div class="firstform">
+        <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <select class="form-control" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Age</label>
+            <input type="number" class="form-control" name="age" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Hypertension (0: No, 1: Yes)</label>
+            <input type="number" class="form-control" name="hypertension" min="0" max="1" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Heart Disease</label>
+            <select class="form-control" name="heart_disease" required>
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">BMI</label>
+            <input type="number" step="0.1" class="form-control" name="bmi" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Smoking History</label>
+            <select class="form-control" name="smoking_history" required>
+                <option value="never">Never</option>
+                <option value="No info">No info</option>
+                <option value="current">Current</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">HbA1c Level</label>
+            <input type="number" step="0.1" class="form-control" name="HbA1c_level" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Blood Glucose Level</label>
+            <input type="number" step="0.1" class="form-control" name="blood_glucose_level" required>
+        </div>
+    </div>
+        <button type="submit" name="home" value="result" class="btn btn-5 btn-primary">Predict Risk</button>
+    </form>
+    {% endif %}
+    
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

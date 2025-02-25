@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request
+from flask import *
+
 import numpy as np
 import pandas as pd
 from modd import mod
-
+from diabetes import predict_Diabetes_disease
 app = Flask(__name__)
 
 df = pd.read_csv("symbipredict_2022.csv")  
@@ -24,24 +25,58 @@ def predict_disease(user_symptoms):
 
 
 
-
-@app.route("/", methods=["GET", "POST"])
-def index():
-    print(request.form.getlist("symptoms"))
+@app.route("/symptoms", methods=["GET", "POST"])
+def symptoms():
     if request.method == "POST":
-        symptoms = request.form.getlist("symptoms")
-        print(symptoms)
-        if(symptoms and symptoms!=['']): 
-            predicted_diseases = predict_disease(symptoms)
-            return render_template("index.html", symptoms=symptom_columns, result=predicted_diseases)
+        if request.form["home"]!="back":
+            symptoms = request.form.getlist("symptoms")
+            if(symptoms and symptoms!=['']): 
+                predicted_diseases = predict_disease(symptoms)
+                return render_template("disease_symptom.html", symptoms=symptom_columns, result=predicted_diseases)
+            else:
+                return render_template("disease_symptom.html", symptoms=symptom_columns, result=None)
         else:
-            return render_template("index.html", symptoms=symptom_columns, result=None)
+            return redirect(url_for("home"))
 
 
-    return render_template("index.html", symptoms=symptom_columns, result=None)
+    return render_template("disease_symptom.html", symptoms=symptom_columns, result=None)
+
+
+@app.route("/", methods=["GET","POST"])
+def main():
+    return redirect(url_for("home"))
+    
+@app.route("/home", methods=["GET","POST"])
+def home():
+    if request.method == "POST":
+        if request.form["page"]=="symptoms":
+            return redirect(url_for("symptoms"))
+        else:
+            return redirect(url_for("diabetes"))
+    return render_template("main.html")
 
 
 
+@app.route("/diabetes", methods=["GET", "POST"])
+def diabetes():
+    if request.method == "POST":
+        if request.form["home"]!="back":
+            user_input = {
+                "gender": request.form["gender"],
+                "age": int(request.form["age"]),
+                "hypertension": int(request.form["hypertension"]),
+                "heart_disease": 1 if request.form["heart_disease"] == "Yes" else 0,
+                "bmi": float(request.form["bmi"]),
+                "smoking_history": request.form["smoking_history"],
+                "HbA1c_level": float(request.form["HbA1c_level"]),
+                "blood_glucose_level": float(request.form["blood_glucose_level"]),
+            }
+            result_text, probability=predict_Diabetes_disease(user_input)
+            return render_template("diabetes.html", result=result_text, probability=f"{probability:.2f}")
+        else:
+            return redirect(url_for("home"))
+
+    return render_template("diabetes.html", result=None)
 
 if __name__ == "__main__":
     app.run(debug=True)

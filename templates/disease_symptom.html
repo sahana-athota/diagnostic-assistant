@@ -16,8 +16,10 @@
                 <li>{{ disease }}</li>
             {% endfor %}
         </ul>
-        <form id="secondform" method="post"><button id="homebutton" name="symptoms" value="">Back to main page</button></form>
-    </div>
+        <form method="post" id="secondform"><button id="homebutton" name="home" value="back" >Back to Home</button></form>
+
+        <!--<form id="secondform" method="post"><button id="homebutton" name="symptoms" class="btn btn-5 btn-primary home" value="">Back to main page</button></form>
+    --></div>
     {% else %}
     
     <!-- Search bar for symptoms -->
@@ -36,7 +38,7 @@
         </div>
 
         <br>
-        <button type="submit">Predict</button>
+        <button type="submit" name="home" value="result">Predict</button>
     </form>
     {% endif %}
     
