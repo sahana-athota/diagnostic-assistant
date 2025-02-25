@@ -1,7 +1,7 @@
-# Diagnostic Assistant - AI-Powered Disease Prediction
+# Diagnoself - AI-Powered Disease Prediction
 
 ## Overview
-**Diagnostic Assistant** is an AI-driven web application that enables users to self-diagnose potential diseases based on their symptoms. By leveraging **Machine Learning (Random Forest Algorithm)** and a structured **medical dataset**, this tool predicts the **top three most likely diseases** a user might have. Additionally, it provides a **Diabetes Risk Assessment**, calculating the probability of a user being diabetic based on key health indicators.
+**Diagnoself** is an AI-driven web application that enables users to self-diagnose potential diseases based on their symptoms. By leveraging **Machine Learning (Random Forest Algorithm)** and a structured **medical dataset**, this tool predicts the **top three most likely diseases** a user might have. Additionally, it provides a **Diabetes Risk Assessment**, calculating the probability of a user being diabetic based on key health indicators.
 
 ## Features
 - **Symptom-Based Disease Prediction** - Users select symptoms, and the AI predicts possible diseases.
