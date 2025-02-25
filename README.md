@@ -30,7 +30,7 @@
 ## Installation & Setup
 ### **Step 1: Clone the Repository**
 ```bash
-git clone https://github.com/sahnana-athota/diagnostic-assistant.git
+git clone https://github.com/sahana-athota/diagnostic-assistant.git
 cd diagnostic-assistant
 ```
 
