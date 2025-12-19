@@ -11,8 +11,8 @@
 - **Privacy Focused** - No personal data is stored; all calculations happen instantly.
 
 ## Technologies Used
-- **Backend:** Python (Flask)
-- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Python 
+- **Frontend:** HTML, CSS
 - **Machine Learning Model:** Random Forest Classifier
 - **Dataset:** CSV files containing symptom-disease mappings and diabetic indicators
 
